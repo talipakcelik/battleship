@@ -17,8 +17,6 @@ const Ship = function (length) {
     isSunk() {
       if (ship.position.every(el => el === 'X')) {
         ship.sunk = true;
-      } else {
-        ship.sunk = false;
       }
     },
   });
