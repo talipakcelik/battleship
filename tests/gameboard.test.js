@@ -3,10 +3,8 @@ import { Ship } from '../src/ship';
 
 test('gameboard places ships at specific coordinates by calling the ship factory function', function () {
   const ship4 = Ship(4);
-  ship4.hit(0);
-  ship4.hit(3);
-  const gameboard = Gameboard();
-  gameboard.place(2, ship4.lengthOfShip, ship4.position);
-  const doArraysIntersect = gameboard.location.slice(2, 6);
-  expect(doArraysIntersect).toEqual(['X', null, null, 'X']);
+  const board1 = Gameboard();
+  board1.place(3, 5, ship4.lengthOfShip, ship4.position);
+  const doArraysIntersect = board1.board[3].slice(5, 9);
+  expect(doArraysIntersect).toEqual(['NH', 'NH', 'NH', 'NH']);
 });
