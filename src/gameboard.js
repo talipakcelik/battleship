@@ -1,14 +1,25 @@
 const Gameboard = function () {
   const gameboard = {
-    location: Array(30).fill(null),
+    board: [
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null, null, null],
+    ],
   };
 
   return Object.freeze({
-    place(coordinate, length, ship) {
-      gameboard.location.splice(coordinate, length, ...ship);
+    place(x, y, length, position) {
+      gameboard.board[x].splice(y, length, ...position);
     },
-    get location() {
-      return gameboard.location;
+    get board() {
+      return gameboard.board;
     },
   });
 };
