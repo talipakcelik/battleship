@@ -21,6 +21,13 @@ const Gameboard = function () {
     get board() {
       return gameboard.board;
     },
+    receiveAttack(x, y) {
+      if (gameboard.board[x][y] === 'NH') {
+        return true;
+      } else if (gameboard.board[x][y] === null) {
+        return false;
+      }
+    },
   });
 };
 
