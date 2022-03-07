@@ -1,32 +1,169 @@
+import { Ship } from './ship';
 const Gameboard = function () {
-  const gameboard = {
+  let gameboard = {
     board: [
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
-      [null, null, null, null, null, null, null, null, null, null],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
+      [
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+        { value: null, hit: false },
+      ],
     ],
+
+    shipStore: [],
   };
 
   return Object.freeze({
-    place(x, y, length, position) {
-      gameboard.board[x].splice(y, length, ...position);
+    place(x, y, ship) {
+      gameboard.shipStore.push(ship);
+      for (let i = y; i <= ship.length + (y - 1); i++) {
+        gameboard.board[x][i].value = ship.name;
+      }
     },
     get board() {
       return gameboard.board;
     },
     receiveAttack(x, y) {
-      if (gameboard.board[x][y] === 'NH') {
+      if (gameboard.board[x][y].value !== null) {
+        gameboard.board[x][y].hit = true;
+        const targetShipName = gameboard.board[x][y].value;
+        const foundShip = gameboard.shipStore.find(
+          el => el.name === targetShipName
+        );
+
+        let counter = 0;
+
+        for (const element of Object.values(gameboard.board[x])) {
+          if (element.value !== targetShipName) {
+            counter++;
+          } else break;
+        }
+
+        foundShip.hit(y - counter);
+
         return true;
-      } else if (gameboard.board[x][y] === null) {
+      } else if (gameboard.board[x][y].value === null) {
+        gameboard.board[x][y].hit = null; // missed attack
+
         return false;
       }
+    },
+    get shipStore() {
+      return gameboard.shipStore;
     },
   });
 };
