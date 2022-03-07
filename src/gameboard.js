@@ -128,14 +128,17 @@ const Gameboard = function () {
   };
 
   return Object.freeze({
+    get board() {
+      return gameboard.board;
+    },
+    get shipStore() {
+      return gameboard.shipStore;
+    },
     place(x, y, ship) {
       gameboard.shipStore.push(ship);
       for (let i = y; i <= ship.length + (y - 1); i++) {
         gameboard.board[x][i].value = ship.name;
       }
-    },
-    get board() {
-      return gameboard.board;
     },
     receiveAttack(x, y) {
       if (gameboard.board[x][y].value !== null) {
@@ -162,8 +165,10 @@ const Gameboard = function () {
         return false;
       }
     },
-    get shipStore() {
-      return gameboard.shipStore;
+    areShipsSunk() {
+      if (gameboard.shipStore.every(ship => ship.isSunk === true)) {
+        return true;
+      } else return false;
     },
   });
 };
