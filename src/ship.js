@@ -1,25 +1,34 @@
-const Ship = function (length) {
-  const ship = { length, position: Array(length).fill(null), sunk: false };
+const Ship = function (length, name) {
+  let shipArray = Array.from(new Array(length), function () {
+    return { value: name, hit: false };
+  });
 
   return Object.freeze({
-    get lengthOfShip() {
-      return ship.length;
+    get name() {
+      return name;
     },
-    get position() {
-      return ship.position;
+    get length() {
+      return shipArray.length;
     },
-    get sunk() {
-      return ship.sunk;
+    get shipArray() {
+      return shipArray;
     },
     hit(index) {
-      ship.position[index] = 'X';
+      shipArray[index].hit = true;
     },
     isSunk() {
-      if (ship.position.every(el => el === 'X')) {
-        ship.sunk = true;
-      }
+      if (shipArray.every(el => el.hit === true)) return true;
+      else return false;
     },
   });
 };
+
+const ship1 = Ship(6, 'blue');
+// ship1.hit(0);
+ship1.hit(1);
+ship1.hit(2);
+ship1.hit(5);
+
+console.log(ship1.shipArray);
 
 export { Ship };
