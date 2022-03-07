@@ -16,7 +16,7 @@ const Ship = function (length, name) {
     hit(index) {
       shipArray[index].hit = true;
     },
-    isSunk() {
+    get isSunk() {
       if (shipArray.every(el => el.hit === true)) return true;
       else return false;
     },
