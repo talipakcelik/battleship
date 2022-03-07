@@ -27,3 +27,12 @@ test('gameboards receiveAttack function that takes a pair of coordinates, determ
   board2.place(2, 1, ship6);
   expect(board2.receiveAttack(3, 1)).toBe(false);
 });
+
+test('gameboards sends the hit function to the correct ship', function () {
+  const ship7 = Ship(6, 'red');
+  const board3 = Gameboard();
+  board3.place(2, 1, ship7);
+  board3.receiveAttack(2, 2);
+  const foundCorrectShip = board3.shipStore.find(el => el.name === ship7.name);
+  expect(foundCorrectShip.shipArray[1].hit).toBe(true);
+});
