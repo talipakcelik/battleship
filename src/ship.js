@@ -16,19 +16,11 @@ const Ship = function (length, name) {
     hit(index) {
       shipArray[index].hit = true;
     },
-    isSunk() {
+    get isSunk() {
       if (shipArray.every(el => el.hit === true)) return true;
       else return false;
     },
   });
 };
-
-const ship1 = Ship(6, 'blue');
-// ship1.hit(0);
-ship1.hit(1);
-ship1.hit(2);
-ship1.hit(5);
-
-console.log(ship1.shipArray);
 
 export { Ship };
