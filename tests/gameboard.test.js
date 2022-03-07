@@ -44,3 +44,24 @@ test('keep track of missed attacks', function () {
   board4.receiveAttack(8, 8);
   expect(board4.board[8][8].hit).toBe(null);
 });
+
+test('gameboards be able to report whether or not all of their ships have been sunk', function () {
+  const board5 = Gameboard();
+  const shipa = Ship(2, 'a');
+  const shipb = Ship(3, 'b');
+  const shipc = Ship(5, 'c');
+  board5.place(1, 0, shipa);
+  board5.place(2, 0, shipb);
+  board5.place(3, 0, shipc);
+  board5.receiveAttack(1, 0);
+  board5.receiveAttack(1, 1);
+  board5.receiveAttack(2, 0);
+  board5.receiveAttack(2, 1);
+  board5.receiveAttack(2, 2);
+  board5.receiveAttack(3, 0);
+  board5.receiveAttack(3, 1);
+  board5.receiveAttack(3, 2);
+  board5.receiveAttack(3, 3);
+  board5.receiveAttack(3, 4);
+  expect(board5.areShipsSunk()).toBe(true);
+});
