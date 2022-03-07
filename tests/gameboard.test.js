@@ -36,3 +36,11 @@ test('gameboards sends the hit function to the correct ship', function () {
   const foundCorrectShip = board3.shipStore.find(el => el.name === ship7.name);
   expect(foundCorrectShip.shipArray[1].hit).toBe(true);
 });
+
+test('keep track of missed attacks', function () {
+  const ship8 = Ship(3);
+  const board4 = Gameboard();
+  board4.place(2, 1, ship8);
+  board4.receiveAttack(8, 8);
+  expect(board4.board[8][8].hit).toBe(null);
+});
