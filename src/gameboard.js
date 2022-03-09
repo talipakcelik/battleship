@@ -1,4 +1,3 @@
-import { Ship } from './ship';
 const Gameboard = function () {
   let gameboard = {
     board: [
