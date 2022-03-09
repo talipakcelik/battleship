@@ -23,6 +23,4 @@ const Ship = function (length, name) {
   });
 };
 
-console.log();
-
 export { Ship };
