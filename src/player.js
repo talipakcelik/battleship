@@ -4,7 +4,7 @@ const Player = function (name, board) {
 
   return Object.freeze({
     get name() {
-      player.name;
+      return player.name;
     },
     attack(x, y) {
       enemyBoard.receiveAttack(x, y);
