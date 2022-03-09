@@ -6,5 +6,350 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
-  <body></body>
+  <body>
+    <nav>
+      <a
+        href="https://github.com/talipakcelik/battleship"
+        target="_blank"
+        rel="noopener noreferrer"
+        ><ion-icon class="github-icon" name="logo-github"></ion-icon
+      ></a>
+    </nav>
+    <menu>
+      <div class="query-container"></div>
+    </menu>
+    <main>
+      <div class="player-board">
+        <table>
+          <tbody>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="0" data-y="0">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="0" data-y="1">1</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="0" data-y="2">2</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="0" data-y="3">3</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="0" data-y="4">4</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="0" data-y="5">5</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="0" data-y="6">6</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="0" data-y="7">7</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="0" data-y="8">8</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="0" data-y="9">9</div>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="1" data-y="0">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="1" data-y="1">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="1" data-y="2">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="1" data-y="3">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="1" data-y="4">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="1" data-y="5">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="1" data-y="6">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="1" data-y="7">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="1" data-y="8">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="1" data-y="9">0</div>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="2" data-y="0">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="2" data-y="1">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="2" data-y="2">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="2" data-y="3">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="2" data-y="4">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="2" data-y="5">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="2" data-y="6">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="2" data-y="7">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="2" data-y="8">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="2" data-y="9">0</div>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="3" data-y="1">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="3" data-y="2">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="3" data-y="3">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="3" data-y="4">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="3" data-y="5">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="3" data-y="6">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="3" data-y="7">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="3" data-y="8">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="3" data-y="9">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="3" data-y="9">0</div>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="4" data-y="0">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="4" data-y="1">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="4" data-y="2">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="4" data-y="3">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="4" data-y="4">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="4" data-y="5">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="4" data-y="6">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="4" data-y="7">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="4" data-y="8">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="4" data-y="9">0</div>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="5" data-y="0">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="5" data-y="1">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="5" data-y="2">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="5" data-y="3">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="5" data-y="4">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="5" data-y="5">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="5" data-y="6">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="5" data-y="7">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="5" data-y="8">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="5" data-y="9">0</div>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="6" data-y="0">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="6" data-y="1">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="6" data-y="2">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="6" data-y="3">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="6" data-y="4">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="6" data-y="5">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="6" data-y="6">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="6" data-y="7">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="6" data-y="8">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="6" data-y="9">0</div>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="7" data-y="0">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="7" data-y="1">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="7" data-y="2">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="7" data-y="3">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="7" data-y="4">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="7" data-y="5">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="7" data-y="6">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="7" data-y="7">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="7" data-y="8">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="7" data-y="9">0</div>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="8" data-y="0">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="8" data-y="1">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="8" data-y="2">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="8" data-y="3">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="8" data-y="4">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="8" data-y="5">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="8" data-y="6">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="8" data-y="7">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="8" data-y="8">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="8" data-y="9">0</div>
+              </td>
+            </tr>
+            <tr class="row">
+              <td class="column">
+                <div class="cell" data-x="9" data-y="0">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="9" data-y="1">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="9" data-y="2">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="9" data-y="3">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="9" data-y="4">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="9" data-y="5">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="9" data-y="6">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="9" data-y="7">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="9" data-y="8">0</div>
+              </td>
+              <td class="column">
+                <div class="cell" data-x="9" data-y="9">0</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="enemy-board"></div>
+    </main>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+  </body>
 </html>
