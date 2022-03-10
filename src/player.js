@@ -6,6 +6,9 @@ const Player = function (name, board) {
     get name() {
       return player.name;
     },
+    get board() {
+      return enemyBoard;
+    },
     attack(x, y) {
       enemyBoard.receiveAttack(x, y);
     },
