@@ -137,6 +137,9 @@ const Gameboard = function () {
       gameboard.shipStore.push(ship);
       for (let i = y; i <= ship.length + (y - 1); i++) {
         gameboard.board[x][i].value = ship.name;
+        document.querySelector(
+          `[data-x='${x}'][data-y='${i}']`
+        ).style.backgroundColor = 'blue';
       }
     },
     receiveAttack(x, y) {
