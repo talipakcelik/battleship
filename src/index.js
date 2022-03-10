@@ -5,9 +5,6 @@ import { Player } from './player';
 import { pairArray } from '../src/random';
 import { randomAttack } from '../src/random';
 
-const board1 = document.querySelector('.player-board');
-const board2 = document.querySelector('.enemy-board');
-
 function switchPlayer() {
   if (activePlayer === player1) activePlayer = player2;
   else activePlayer = player1;
@@ -43,8 +40,13 @@ console.log(enemyBoard.board);
 
 let activePlayer = player1;
 
-board2.addEventListener('click', function (e) {
+const cells = Array.from(document.querySelectorAll(`[data-a][data-b]`));
+cells.forEach(cell => cell.addEventListener('click', game));
+
+function game(e) {
   player1.attack(e.target.dataset.a, e.target.dataset.b);
+  e.target.removeEventListener('click', game);
+
   switchPlayer();
   randomAttack(0, pairArray.length - 1, activePlayer);
 
@@ -54,9 +56,14 @@ board2.addEventListener('click', function (e) {
     document.querySelector(
       '.text'
     ).textContent = `Game over. Congratulations, you won!`;
+    removeListener();
   } else if (player2.board.areShipsSunk() === true) {
     document.querySelector('.text').textContent = `Game over. You lose.`;
+    removeListener();
   }
-});
+}
 
+function removeListener() {
+  cells.forEach(cell => cell.removeEventListener('click', game));
+}
 export { switchPlayer, activePlayer, player1, playerBoard };
