@@ -103,14 +103,8 @@ let pairArray = [
 
 function randomAttack(min, max, player) {
   const random = Math.floor(Math.random() * (max - min + 1)) + min;
-
   player.attack(pairArray[random][0], pairArray[random][1]);
-  document.querySelector(
-    `[data-x='${pairArray[random][0]}'][data-y='${pairArray[random][1]}']`
-  ).textContent = 'X';
   pairArray.splice(random, 1);
-  console.log(random);
-  console.log(pairArray);
 }
 
 export { randomAttack, pairArray };
