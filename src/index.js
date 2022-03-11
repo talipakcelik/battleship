@@ -5,6 +5,8 @@ import { Player } from './player';
 import { pairArray } from '../src/random';
 import { randomAttack } from '../src/random';
 
+const cells = document.querySelectorAll(`[data-a][data-b]`);
+
 const playerBoard = Gameboard();
 const enemyBoard = Gameboard();
 const player1 = Player('player1', enemyBoard);
@@ -37,7 +39,6 @@ enemyBoard.place(4, 4, patrol2);
 
 let activePlayer = player1;
 
-const cells = Array.from(document.querySelectorAll(`[data-a][data-b]`));
 cells.forEach(cell => cell.addEventListener('click', game));
 
 function game(e) {
