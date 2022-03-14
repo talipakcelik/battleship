@@ -45,7 +45,17 @@ for (const cell of cells) {
     target.ship.style.position = 'relative';
     target.ship.style.top = '-1rem';
     target.ship.style.left = '-1.5rem';
-    e.target.classList.add('taken');
+    // e.target.classList.add('taken');
     console.log(e.target.dataset.y);
+
+    let counter = e.target.dataset.y;
+
+    for (let i = 0; i < target.shipLength; i++) {
+      document
+        .querySelector(`[data-x='${e.target.dataset.x}'][data-y='${counter}']`)
+        .classList.add('is-taken');
+
+      counter++;
+    }
   });
 }
