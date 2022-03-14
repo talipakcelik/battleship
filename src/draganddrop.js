@@ -17,15 +17,25 @@ ships.forEach(ship =>
   ship.addEventListener('dragstart', function (e) {
     target['ship'] = e.target;
     target['shipLength'] = e.target.childElementCount;
-    // console.log(e.target.childElementCount);
-    // console.log(e.target);
-    // console.log(target);
+
+    console.log(e.target.parentElement.dataset.y);
+
+    let counter = e.target.parentElement.dataset.y;
+
+    for (let i = 0; i < target.shipLength; i++) {
+      document
+        .querySelector(
+          `[data-x='${e.target.parentElement.dataset.x}'][data-y='${counter}']`
+        )
+        .classList.remove('is-taken');
+
+      counter++;
+    }
   })
 );
 
 shipsContainer.addEventListener('mousedown', function (e) {
   target['shipNameWithId'] = e.target.id;
-  // console.log('grap');
 });
 
 for (const cell of cells) {
@@ -41,21 +51,35 @@ for (const cell of cells) {
     // console.log('dragleave');
   });
   cell.addEventListener('drop', function (e) {
-    e.target.append(target.ship);
-    target.ship.style.position = 'relative';
-    target.ship.style.top = '-1rem';
-    target.ship.style.left = '-1.5rem';
-    // e.target.classList.add('taken');
-    console.log(e.target.dataset.y);
+    // console.log(e.target);
+    // console.log(e.target.classList.contains('is-taken'));
 
-    let counter = e.target.dataset.y;
+    if (
+      !e.target.classList.contains('is-taken') &&
+      !e.target.parentElement.classList.contains('ship')
+    ) {
+      e.target.append(target.ship);
+      target.ship.style.position = 'relative';
+      target.ship.style.top = '-1rem';
+      target.ship.style.left = '-1.5rem';
+      // e.target.classList.add('taken');
+      console.log(e.target.dataset.y);
 
-    for (let i = 0; i < target.shipLength; i++) {
-      document
-        .querySelector(`[data-x='${e.target.dataset.x}'][data-y='${counter}']`)
-        .classList.add('is-taken');
+      let counter = e.target.dataset.y;
 
-      counter++;
+      for (let i = 0; i < target.shipLength; i++) {
+        document
+          .querySelector(
+            `[data-x='${e.target.dataset.x}'][data-y='${counter}']`
+          )
+          .classList.add('is-taken');
+
+        counter++;
+      }
     }
   });
 }
+
+board.addEventListener('click', e => {
+  console.log(e.target.parentElement.classList.contains('ship'));
+});
