@@ -4,6 +4,7 @@ import { Gameboard } from './gameboard.js';
 import { Player } from './player';
 import { pairArray } from '../src/random';
 import { randomAttack } from '../src/random';
+import interact from './draganddrop.js';
 
 const cells = document.querySelectorAll(`[data-a][data-b]`);
 
@@ -37,9 +38,6 @@ player1.board.place(1, 1, battleship2);
 player1.board.place(2, 2, destroyer2);
 player1.board.place(3, 3, submarine2);
 player1.board.place(4, 4, patrol2);
-
-console.log(player1.board);
-console.log(player2.board);
 
 switchPlayer();
 
@@ -77,4 +75,5 @@ function switchPlayer() {
   if (activePlayer === player1) activePlayer = player2;
   else activePlayer = player1;
 }
+
 export { switchPlayer, activePlayer, player1, playerBoard };
