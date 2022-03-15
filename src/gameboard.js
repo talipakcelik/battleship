@@ -140,12 +140,11 @@ const Gameboard = function () {
       gameboard.shipStore.push(ship);
       for (let i = y; i <= ship.length + (y - 1); i++) {
         gameboard.board[x][i].value = ship.name;
-
-        if (activePlayer === player1) {
-          document.querySelector(
-            `[data-x='${x}'][data-y='${i}']`
-          ).style.backgroundColor = 'blue';
-        }
+      }
+    },
+    displace(x, y, ship) {
+      for (let i = y; i <= ship.length + (y - 1); i++) {
+        gameboard.board[x][i].value = null;
       }
     },
     receiveAttack(x, y) {
