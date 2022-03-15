@@ -1,3 +1,12 @@
+import {
+  player2,
+  carrier,
+  battleship,
+  destroyer,
+  submarine,
+  patrol,
+} from './index.js';
+
 const cells = document.querySelectorAll(`[data-x][data-y]`);
 const shipsContainer = document.querySelector('.ships-container');
 const ships = document.querySelectorAll('.ship');
@@ -60,7 +69,26 @@ function dragStartShip(e) {
 
       counter++;
     }
+
+    if (target.shipNameWithId.slice(0, -2) === 'carrier')
+      displaceShip(e, carrier);
+    else if (target.shipNameWithId.slice(0, -2) === 'battleship')
+      displaceShip(e, battleship);
+    else if (target.shipNameWithId.slice(0, -2) === 'destroyer')
+      displaceShip(e, destroyer);
+    else if (target.shipNameWithId.slice(0, -2) === 'submarine')
+      displaceShip(e, submarine);
+    else if (target.shipNameWithId.slice(0, -2) === 'patrol')
+      displaceShip(e, patrol);
   }
+}
+
+function displaceShip(e, shipName) {
+  player2.board.displace(
+    e.target.parentElement.dataset.x,
+    e.target.parentElement.dataset.y,
+    shipName
+  );
 }
 
 function dropShip(e) {
@@ -73,30 +101,35 @@ function dropShip(e) {
     counter >= 0
   ) {
     placeShip(e, counter);
+    placeShipTo2DArray(e, carrier);
   } else if (
     target.shipNameWithId.substring(-1, 10) === 'battleship' &&
     counter < 7 &&
     counter >= 0
   ) {
     placeShip(e, counter);
+    placeShipTo2DArray(e, battleship);
   } else if (
     target.shipNameWithId.substring(-1, 9) === 'destroyer' &&
     counter < 8 &&
     counter >= 0
   ) {
     placeShip(e, counter);
+    placeShipTo2DArray(e, destroyer);
   } else if (
     target.shipNameWithId.substring(-1, 9) === 'submarine' &&
     counter < 8 &&
     counter >= 0
   ) {
     placeShip(e, counter);
+    placeShipTo2DArray(e, submarine);
   } else if (
     target.shipNameWithId.substring(-1, 6) === 'patrol' &&
     counter < 9 &&
     counter >= 0
   ) {
     placeShip(e, counter);
+    placeShipTo2DArray(e, patrol);
   }
 }
 
@@ -119,4 +152,14 @@ function placeShip(e, counter) {
 
     counter++;
   }
+}
+
+function placeShipTo2DArray(e, shipName) {
+  player2.board.place(
+    e.target.dataset.x,
+    e.target.dataset.y - shipIndex,
+    shipName
+  );
+  console.log(player2.board);
+  console.log(e.target.dataset.x, e.target.dataset.y - shipIndex);
 }
