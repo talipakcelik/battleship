@@ -19,6 +19,7 @@ const target = {
 };
 
 let shipIndex;
+let placeCheck;
 
 ships.forEach(ship => ship.addEventListener('dragstart', dragStartShip));
 
@@ -26,7 +27,7 @@ board.addEventListener('mousedown', grapShip);
 
 shipsContainer.addEventListener('mousedown', grapShip);
 
-board.addEventListener('dragover', function (e) {});
+board.addEventListener('dragover', dragOverShip);
 
 for (const cell of cells) {
   cell.addEventListener('dragover', dragOverShip);
@@ -93,7 +94,7 @@ function displaceShip(e, shipName) {
 
 function dropShip(e) {
   let counter = e.target.dataset.y - shipIndex;
-  console.log(counter, 'counter', shipIndex);
+  // console.log(counter, 'counter', shipIndex);
 
   if (
     target.shipNameWithId.substring(-1, 7) === 'carrier' &&
@@ -101,57 +102,81 @@ function dropShip(e) {
     counter >= 0
   ) {
     placeShip(e, counter);
-    placeShipTo2DArray(e, carrier);
+    if (placeCheck) {
+      placeShipTo2DArray(e, carrier);
+    }
   } else if (
     target.shipNameWithId.substring(-1, 10) === 'battleship' &&
     counter < 7 &&
     counter >= 0
   ) {
     placeShip(e, counter);
-    placeShipTo2DArray(e, battleship);
+    if (placeCheck) {
+      placeShipTo2DArray(e, battleship);
+    }
   } else if (
     target.shipNameWithId.substring(-1, 9) === 'destroyer' &&
     counter < 8 &&
     counter >= 0
   ) {
     placeShip(e, counter);
-    placeShipTo2DArray(e, destroyer);
+    if (placeCheck) {
+      placeShipTo2DArray(e, destroyer);
+    }
   } else if (
     target.shipNameWithId.substring(-1, 9) === 'submarine' &&
     counter < 8 &&
     counter >= 0
   ) {
     placeShip(e, counter);
-    placeShipTo2DArray(e, submarine);
+    if (placeCheck) {
+      placeShipTo2DArray(e, submarine);
+    }
   } else if (
     target.shipNameWithId.substring(-1, 6) === 'patrol' &&
     counter < 9 &&
     counter >= 0
   ) {
     placeShip(e, counter);
-    placeShipTo2DArray(e, patrol);
+    if (placeCheck) {
+      placeShipTo2DArray(e, patrol);
+    }
   }
 }
 
 function placeShip(e, counter) {
-  document
-    .querySelector(
-      `[data-x='${e.target.dataset.x}'][data-y='${
-        e.target.dataset.y - shipIndex
-      }']`
-    )
-    .append(target.ship);
-  target.ship.style.position = 'relative';
-  target.ship.style.top = '-1rem';
-  target.ship.style.left = '-1.5rem';
+  let checkArray = [];
 
   for (let i = 0; i < target.shipLength; i++) {
-    document
+    let check = document
       .querySelector(`[data-x='${e.target.dataset.x}'][data-y='${counter}']`)
-      .classList.add('is-taken');
+      .classList.contains('is-taken');
 
+    checkArray.push(check);
     counter++;
   }
+  if (checkArray.every(el => el === false)) {
+    placeCheck = true;
+    let counter2 = e.target.dataset.y - shipIndex;
+    for (let i = 0; i < target.shipLength; i++) {
+      document
+        .querySelector(
+          `[data-x='${e.target.dataset.x}'][data-y='${
+            e.target.dataset.y - shipIndex
+          }']`
+        )
+        .append(target.ship);
+      target.ship.style.position = 'relative';
+      target.ship.style.top = '-1rem';
+      target.ship.style.left = '-1.5rem';
+      /////////////////////////////////////////////
+      document
+        .querySelector(`[data-x='${e.target.dataset.x}'][data-y='${counter2}']`)
+        .classList.add('is-taken');
+
+      counter2++;
+    }
+  } else placeCheck = false;
 }
 
 function placeShipTo2DArray(e, shipName) {
@@ -160,6 +185,4 @@ function placeShipTo2DArray(e, shipName) {
     e.target.dataset.y - shipIndex,
     shipName
   );
-  console.log(player2.board);
-  console.log(e.target.dataset.x, e.target.dataset.y - shipIndex);
 }
