@@ -9,7 +9,6 @@ const target = {
   shipLength: 0,
 };
 
-let boardCheck;
 let shipIndex;
 
 ships.forEach(ship => ship.addEventListener('dragstart', dragStartShip));
@@ -29,17 +28,10 @@ for (const cell of cells) {
 
 function grapShip(e) {
   target['shipNameWithId'] = e.target.id;
-  console.log(e.target.id);
 }
 
 function dragOverShip(e) {
   e.preventDefault();
-
-  if (target.shipNameWithId.substring(-1, 7) === 'carrier') {
-    boardCheck = target.shipLength + e.target.dataset.y <= 10;
-  } else if (target.shipNameWithId.substring(-1, 10) === 'battleship') {
-    boardCheck = e.target.dataset.y <= 6;
-  }
 }
 
 function dragEnterShip(e) {
