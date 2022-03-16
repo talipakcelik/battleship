@@ -1,3 +1,12 @@
+import {
+  player1,
+  carrier2,
+  battleship2,
+  destroyer2,
+  submarine2,
+  patrol2,
+} from './index.js';
+
 let pairArray = [
   [0, 0],
   [0, 1],
@@ -107,4 +116,51 @@ function randomAttack(min, max, player) {
   pairArray.splice(random, 1);
 }
 
-export { randomAttack, pairArray };
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+let freeRow;
+
+function filterBoard() {
+  return player1.board.board
+    .map(el => el.findIndex(el => el.value !== null))
+    .reduce((r, n, i) => {
+      n === -1 && r.push(i);
+      return r;
+    }, []);
+}
+
+function placeShipRandom() {
+  player1.board.place(randomNumber(0, 9), randomNumber(0, 5), carrier2);
+
+  freeRow = filterBoard();
+
+  player1.board.place(
+    freeRow[randomNumber(0, 8)],
+    randomNumber(0, 6),
+    battleship2
+  );
+
+  freeRow = filterBoard();
+
+  player1.board.place(
+    freeRow[randomNumber(0, 7)],
+    randomNumber(0, 7),
+    destroyer2
+  );
+
+  freeRow = filterBoard();
+
+  player1.board.place(
+    freeRow[randomNumber(0, 6)],
+    randomNumber(0, 7),
+    submarine2
+  );
+
+  freeRow = filterBoard();
+
+  player1.board.place(freeRow[randomNumber(0, 5)], randomNumber(0, 8), patrol2);
+}
+
+export { randomAttack, pairArray, placeShipRandom };
