@@ -2,9 +2,8 @@ import style from './style.css';
 import { Ship } from './ship.js';
 import { Gameboard } from './gameboard.js';
 import { Player } from './player';
-import { pairArray } from '../src/random';
-import { randomAttack } from '../src/random';
-import interact from './draganddrop.js';
+import { pairArray, randomAttack, placeShipRandom } from '../src/random';
+import interact from './dragAndDrop.js';
 
 const cells = document.querySelectorAll(`[data-a][data-b]`);
 
@@ -20,11 +19,6 @@ const battleship = Ship(4, 'Battleship');
 const destroyer = Ship(3, 'Destroyer');
 const submarine = Ship(3, 'Submarine');
 const patrol = Ship(2, 'Patrol Boat');
-player2.board.place(0, 0, carrier);
-player2.board.place(1, 1, battleship);
-player2.board.place(2, 2, destroyer);
-player2.board.place(3, 3, submarine);
-player2.board.place(4, 4, patrol);
 
 switchPlayer();
 
@@ -33,11 +27,8 @@ const battleship2 = Ship(4, 'Battleship');
 const destroyer2 = Ship(3, 'Destroyer');
 const submarine2 = Ship(3, 'Submarine');
 const patrol2 = Ship(2, 'Patrol Boat');
-player1.board.place(8, 0, carrier2);
-player1.board.place(1, 1, battleship2);
-player1.board.place(2, 2, destroyer2);
-player1.board.place(3, 3, submarine2);
-player1.board.place(4, 4, patrol2);
+
+placeShipRandom();
 
 switchPlayer();
 
@@ -45,7 +36,9 @@ cells.forEach(cell => cell.addEventListener('click', game));
 
 function game(e) {
   player1.attack(e.target.dataset.a, e.target.dataset.b);
+
   e.target.removeEventListener('click', game);
+
   switchPlayer();
 
   if (
@@ -76,4 +69,20 @@ function switchPlayer() {
   else activePlayer = player1;
 }
 
-export { switchPlayer, activePlayer, player1, playerBoard };
+export {
+  switchPlayer,
+  activePlayer,
+  player1,
+  player2,
+  playerBoard,
+  carrier,
+  battleship,
+  destroyer,
+  submarine,
+  patrol,
+  carrier2,
+  battleship2,
+  destroyer2,
+  submarine2,
+  patrol2,
+};
