@@ -1,10 +1,10 @@
 import {
-  player1,
-  carrier2,
-  battleship2,
-  destroyer2,
-  submarine2,
-  patrol2,
+  player2,
+  patrolContainer,
+  submarineContainer,
+  destroyerContainer,
+  battleshipContainer,
+  carrierContainer,
 } from './index.js';
 
 let pairArray = [
@@ -120,10 +120,8 @@ function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let freeRow;
-
-function filterBoard() {
-  return player1.board.board
+function filterBoard(player) {
+  return player.board.board
     .map(el => el.findIndex(el => el.value !== null))
     .reduce((r, n, i) => {
       n === -1 && r.push(i);
@@ -131,36 +129,103 @@ function filterBoard() {
     }, []);
 }
 
-function placeShipRandom() {
-  player1.board.place(randomNumber(0, 9), randomNumber(0, 5), carrier2);
+function placeShipRandom(
+  player,
+  carrier,
+  battleship,
+  destroyer,
+  submarine,
+  patrol
+) {
+  let freeRow;
+  const randomNumberForCarrier1 = randomNumber(0, 9);
+  const randomNumberForCarrier2 = randomNumber(0, 5);
 
-  freeRow = filterBoard();
+  player.board.place(randomNumberForCarrier1, randomNumberForCarrier2, carrier);
 
-  player1.board.place(
-    freeRow[randomNumber(0, 8)],
-    randomNumber(0, 6),
-    battleship2
+  if (player === player2) {
+    document
+      .querySelector(
+        `[data-x='${randomNumberForCarrier1}'][data-y='${randomNumberForCarrier2}']`
+      )
+      .append(carrierContainer);
+  }
+
+  freeRow = filterBoard(player);
+
+  const randomNumberForBattleship1 = randomNumber(0, 8);
+  const randomNumberForBattleship2 = randomNumber(0, 6);
+
+  player.board.place(
+    freeRow[randomNumberForBattleship1],
+    randomNumberForBattleship2,
+    battleship
   );
 
-  freeRow = filterBoard();
+  if (player === player2) {
+    document
+      .querySelector(
+        `[data-x='${freeRow[randomNumberForBattleship1]}'][data-y='${randomNumberForBattleship2}']`
+      )
+      .append(battleshipContainer);
+  }
 
-  player1.board.place(
-    freeRow[randomNumber(0, 7)],
-    randomNumber(0, 7),
-    destroyer2
+  freeRow = filterBoard(player);
+
+  const randomNumberForDestroyer1 = randomNumber(0, 7);
+  const randomNumberForDestroyer2 = randomNumber(0, 7);
+
+  player.board.place(
+    freeRow[randomNumberForDestroyer1],
+    randomNumberForDestroyer2,
+    destroyer
   );
 
-  freeRow = filterBoard();
+  if (player === player2) {
+    document
+      .querySelector(
+        `[data-x='${freeRow[randomNumberForDestroyer1]}'][data-y='${randomNumberForDestroyer2}']`
+      )
+      .append(destroyerContainer);
+  }
 
-  player1.board.place(
-    freeRow[randomNumber(0, 6)],
-    randomNumber(0, 7),
-    submarine2
+  freeRow = filterBoard(player);
+
+  const randomNumberForSubmarine1 = randomNumber(0, 6);
+  const randomNumberForSubmarine2 = randomNumber(0, 7);
+
+  player.board.place(
+    freeRow[randomNumberForSubmarine1],
+    randomNumberForSubmarine2,
+    submarine
   );
 
-  freeRow = filterBoard();
+  if (player === player2) {
+    document
+      .querySelector(
+        `[data-x='${freeRow[randomNumberForSubmarine1]}'][data-y='${randomNumberForSubmarine2}']`
+      )
+      .append(submarineContainer);
+  }
 
-  player1.board.place(freeRow[randomNumber(0, 5)], randomNumber(0, 8), patrol2);
+  freeRow = filterBoard(player);
+
+  const randomNumberForPatrol1 = randomNumber(0, 5);
+  const randomNumberForPatrol2 = randomNumber(0, 8);
+
+  player.board.place(
+    freeRow[randomNumberForPatrol1],
+    randomNumberForPatrol2,
+    patrol
+  );
+
+  if (player === player2) {
+    document
+      .querySelector(
+        `[data-x='${freeRow[randomNumberForPatrol1]}'][data-y='${randomNumberForPatrol2}']`
+      )
+      .append(patrolContainer);
+  }
 }
 
 export { randomAttack, pairArray, placeShipRandom };
