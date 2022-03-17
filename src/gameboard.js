@@ -1,5 +1,5 @@
-import { activePlayer } from './index';
-import { player1 } from './index';
+import { activePlayer, player1 } from './index';
+import { target } from './dragAndDrop';
 
 const Gameboard = function () {
   let gameboard = {
@@ -150,12 +150,6 @@ const Gameboard = function () {
     receiveAttack(x, y) {
       if (gameboard.board[x][y].value !== null) {
         gameboard.board[x][y].hit = true;
-        if (activePlayer === player1)
-          document.querySelector(`[data-a='${x}'][data-b='${y}']`).textContent =
-            'H';
-        else
-          document.querySelector(`[data-x='${x}'][data-y='${y}']`).textContent =
-            'H';
 
         const targetShipName = gameboard.board[x][y].value;
         const foundShip = gameboard.shipStore.find(
@@ -172,15 +166,53 @@ const Gameboard = function () {
 
         foundShip.hit(y - counter);
 
+        if (activePlayer === player1) {
+          document
+            .querySelector(`[data-a='${x}'][data-b='${y}']`)
+            .classList.add('hit');
+          document
+            .querySelector(`[data-a='${x}'][data-b='${y}']`)
+            .classList.add(`com-${foundShip.name}`);
+
+          if (foundShip.isSunk === true) {
+            document
+              .querySelectorAll(`.com-${foundShip.name}`)
+              .forEach(
+                el => (
+                  (el.style.border = '1px solid red'),
+                  (el.style.backgroundColor = 'rgba(255,0,0,.05)')
+                )
+              );
+          }
+        } else {
+          document
+            .querySelector(`[data-x='${x}'][data-y='${y}']`)
+            .classList.add('hit');
+
+          if (foundShip.isSunk === true) {
+            document.querySelector(
+              `.${foundShip.name}-container`
+            ).style.border = 'none';
+            Array.from(
+              document.querySelector(`.${foundShip.name}-container`).children
+            ).forEach(el => (el.style.border = '1px solid red'));
+            document.querySelector(
+              `.${foundShip.name}-container`
+            ).style.backgroundColor = 'rgba(255,0,0,.05)';
+          }
+        }
+
         return true;
       } else if (gameboard.board[x][y].value === null) {
         gameboard.board[x][y].hit = null; // missed attack
         if (activePlayer === player1)
-          document.querySelector(`[data-a='${x}'][data-b='${y}']`).textContent =
-            'N';
+          document
+            .querySelector(`[data-a='${x}'][data-b='${y}']`)
+            .classList.add('attack');
         else
-          document.querySelector(`[data-x='${x}'][data-y='${y}']`).textContent =
-            'N';
+          document
+            .querySelector(`[data-x='${x}'][data-y='${y}']`)
+            .classList.add('attack');
 
         return false;
       }
