@@ -140,6 +140,7 @@ play.addEventListener('click', function () {
   random.removeEventListener('click', placeRandom);
   setDraggable(false, 'default');
   document.querySelector('.play').style.display = 'none';
+  document.querySelector('.text').textContent = `The game started, your turn.`;
 });
 
 const playerBoard = Gameboard();
@@ -181,17 +182,33 @@ placeShipRandom(
 switchPlayer();
 
 function game(e) {
+  document.querySelector('.text').textContent = `Opponent's turn, please wait.`;
+
   player1.attack(e.target.dataset.a, e.target.dataset.b);
 
   e.target.removeEventListener('click', game);
-
-  switchPlayer();
+  removeListener();
 
   if (
     player1.board.areShipsSunk() === false &&
     player2.board.areShipsSunk() === false
   ) {
-    randomAttack(0, pairArray.length - 1, activePlayer);
+    setTimeout(function () {
+      // switchPlayer();
+      randomAttack(0, pairArray.length - 1, activePlayer);
+      document.querySelector('.text').textContent = `Your turn.`;
+      cells.forEach(cell => {
+        if (
+          !cell.classList.contains('hit') &&
+          !cell.classList.contains('attack')
+        ) {
+          cell.addEventListener('click', game);
+        }
+      });
+
+      switchPlayer();
+    }, 1000);
+
     switchPlayer();
   }
 
@@ -200,11 +217,9 @@ function game(e) {
       '.text'
     ).textContent = `Game over. Congratulations, you won!`;
     removeListener();
-    // switchPlayer();
   } else if (player2.board.areShipsSunk() === true) {
     document.querySelector('.text').textContent = `Game over. You lose.`;
     removeListener();
-    // switchPlayer();
   }
 }
 
