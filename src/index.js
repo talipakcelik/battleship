@@ -205,9 +205,13 @@ function game(e) {
           cell.addEventListener('click', game);
         }
       });
+      if (player2.board.areShipsSunk() === true) {
+        document.querySelector('.text').textContent = `Game over. You lose.`;
+        removeListener();
+      }
 
       switchPlayer();
-    }, 1000);
+    }, 1);
 
     switchPlayer();
   }
@@ -216,9 +220,6 @@ function game(e) {
     document.querySelector(
       '.text'
     ).textContent = `Game over. Congratulations, you won!`;
-    removeListener();
-  } else if (player2.board.areShipsSunk() === true) {
-    document.querySelector('.text').textContent = `Game over. You lose.`;
     removeListener();
   }
 }
