@@ -141,6 +141,7 @@ play.addEventListener('click', function () {
   setDraggable(false, 'default');
   document.querySelector('.play').style.display = 'none';
   document.querySelector('.text').textContent = `The game started, your turn.`;
+  document.querySelector('.player-board').classList.add('active');
 });
 
 const playerBoard = Gameboard();
@@ -185,6 +186,8 @@ function game(e) {
   document.querySelector('.text').textContent = `Opponent's turn, please wait.`;
 
   player1.attack(e.target.dataset.a, e.target.dataset.b);
+  document.querySelector('.enemy-board').classList.add('active');
+  document.querySelector('.player-board').classList.remove('active');
 
   e.target.removeEventListener('click', game);
   removeListener();
@@ -194,7 +197,6 @@ function game(e) {
     player2.board.areShipsSunk() === false
   ) {
     setTimeout(function () {
-      // switchPlayer();
       randomAttack(0, pairArray.length - 1, activePlayer);
       document.querySelector('.text').textContent = `Your turn.`;
       cells.forEach(cell => {
@@ -210,8 +212,13 @@ function game(e) {
         removeListener();
       }
 
+      setTimeout(function () {
+        document.querySelector('.enemy-board').classList.remove('active');
+        document.querySelector('.player-board').classList.add('active');
+      }, 500);
+
       switchPlayer();
-    }, 1);
+    }, 1000);
 
     switchPlayer();
   }
