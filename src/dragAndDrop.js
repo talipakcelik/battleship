@@ -25,8 +25,6 @@ ships.forEach(ship => ship.addEventListener('dragstart', dragStartShip));
 
 board.addEventListener('mousedown', grapShip);
 
-shipsContainer.addEventListener('mousedown', grapShip);
-
 board.addEventListener('dragover', dragOverShip);
 
 for (const cell of cells) {
@@ -46,12 +44,9 @@ function dragOverShip(e) {
 
 function dragEnterShip(e) {
   e.preventDefault();
-  // console.log('dragenter');
 }
 
-function dragLeaveShip(e) {
-  // console.log('dragleave');
-}
+function dragLeaveShip(e) {}
 
 function dragStartShip(e) {
   target['ship'] = e.target;
@@ -94,7 +89,6 @@ function displaceShip(e, shipName) {
 
 function dropShip(e) {
   let counter = e.target.dataset.y - shipIndex;
-  // console.log(counter, 'counter', shipIndex);
 
   if (
     target.shipNameWithId.substring(-1, 7) === 'carrier' &&
@@ -166,9 +160,6 @@ function placeShip(e, counter) {
           }']`
         )
         .append(target.ship);
-      target.ship.style.position = 'relative';
-      target.ship.style.top = '-1rem';
-      target.ship.style.left = '-1.5rem';
       /////////////////////////////////////////////
       document
         .querySelector(`[data-x='${e.target.dataset.x}'][data-y='${counter2}']`)
@@ -186,3 +177,5 @@ function placeShipTo2DArray(e, shipName) {
     shipName
   );
 }
+
+export { target };
