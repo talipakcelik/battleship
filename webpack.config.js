@@ -49,7 +49,7 @@ module.exports = {
       title: 'battleship',
       filename: 'index.html',
       template: path.resolve(__dirname, 'src/temp.html'),
-      // favicon: "",
+      favicon: 'boat.svg',
     }),
   ],
 };
