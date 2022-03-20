@@ -109,6 +109,8 @@ reset.addEventListener('click', function () {
   document.querySelector('.play').style.display = '';
   removeClassFromCells();
   addClassToCells();
+  document.querySelector('.enemy-board').classList.remove('active');
+  document.querySelector('.player-board').classList.remove('active');
 });
 
 function addClassToCells() {
@@ -183,7 +185,7 @@ placeShipRandom(
 switchPlayer();
 
 function game(e) {
-  document.querySelector('.text').textContent = `Opponent's turn, please wait.`;
+  document.querySelector('.text').textContent = `Opponent's turn.`;
 
   player1.attack(e.target.dataset.a, e.target.dataset.b);
   document.querySelector('.enemy-board').classList.add('active');
@@ -198,23 +200,26 @@ function game(e) {
   ) {
     setTimeout(function () {
       randomAttack(0, pairArray.length - 1, activePlayer);
-      document.querySelector('.text').textContent = `Your turn.`;
-      cells.forEach(cell => {
-        if (
-          !cell.classList.contains('hit') &&
-          !cell.classList.contains('attack')
-        ) {
-          cell.addEventListener('click', game);
-        }
-      });
+
       if (player2.board.areShipsSunk() === true) {
         document.querySelector('.text').textContent = `Game over. You lose.`;
         removeListener();
+        document.querySelector('.enemy-board').classList.remove('active');
+        document.querySelector('.player-board').classList.remove('active');
       }
 
       setTimeout(function () {
         document.querySelector('.enemy-board').classList.remove('active');
         document.querySelector('.player-board').classList.add('active');
+        cells.forEach(cell => {
+          if (
+            !cell.classList.contains('hit') &&
+            !cell.classList.contains('attack')
+          ) {
+            cell.addEventListener('click', game);
+          }
+        });
+        document.querySelector('.text').textContent = `Your turn.`;
       }, 500);
 
       switchPlayer();
@@ -228,6 +233,8 @@ function game(e) {
       '.text'
     ).textContent = `Game over. Congratulations, you won!`;
     removeListener();
+    document.querySelector('.enemy-board').classList.remove('active');
+    document.querySelector('.player-board').classList.remove('active');
   }
 }
 
