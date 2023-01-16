@@ -1,5 +1,4 @@
 ## Introduction
-- The project is completed within the scope of [TheOdinProject's curriculum](https://www.theodinproject.com/paths/full-stack-javascript/courses/javascript/lessons/battleship). 
 - [Live Preview](https://talipakcelik.github.io/battleship/)
 
 ---
